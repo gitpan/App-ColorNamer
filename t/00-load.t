@@ -16,11 +16,11 @@ diag( "Testing App::ColorNamer $App::ColorNamer::VERSION, Perl $], $^X" );
 my $app = App::ColorNamer->new;
 
 my @dumps = get_dump_vars();
-is_deeply($app->get_name('#aaa'), $dumps[0], 'Color #aaa');
-is_deeply($app->get_name('#bbbaaa'), $dumps[1], 'Color #bbbaaa');
-is_deeply($app->get_name('fff'), $dumps[2], 'Color fff');
-is_deeply($app->get_name('#bbbaaa', 1), $dumps[3], 'Color #bbbaaa with sane colors turned on');
-is_deeply($app->color, $dumps[3], 'Return of ->color()');
+is_deeply($app->get_name('#aaa')->{name}, "Silver Chalice", 'Color #aaa');
+is_deeply($app->get_name('#bbbaaa')->{name}, "Ash", 'Color #bbbaaa');
+is_deeply($app->get_name('fff')->{name}, "White", 'Color fff');
+is_deeply($app->get_name('#bbbaaa', 1)->{name}, "Gray Olive", 'Color #bbbaaa with sane colors turned on');
+is_deeply($app->color->{name}, "Gray Olive", 'Return of ->color()');
 is(scalar($app->get_name('#')), undef, 'Invalid color');
 is($app->error, "Color code must be either three or six hex digits", '->error() return after invalid color');
 
@@ -59,7 +59,7 @@ for ( @$sane_colors ) {
 
 $app->sane_colors(['FFFFFF', 'ACA59F']);
 is_deeply($app->sane_colors, ['FFFFFF', 'ACA59F'], '->sane_colors()');
-is_deeply($app->get_name('#aaa', 1), $dumps[4], '->get_name() with user specified sane colors');
+is_deeply($app->get_name('#aaa', 1)->{name}, 'Cloudy', '->get_name() with user specified sane colors');
 
 sub get_dump_vars {
     return (
@@ -71,7 +71,7 @@ sub get_dump_vars {
                    },
           "name" => "Silver Chalice",
           "hsl" => {
-                     "l" => "0.674509803921569",
+                     "l" => int "0.674509803921569",
                      "h" => 0,
                      "s" => 0
                    },
@@ -85,9 +85,9 @@ sub get_dump_vars {
                    },
           "name" => "Ash",
           "hsl" => {
-                     "l" => "0.743137254901961",
-                     "h" => "49.4117647058823",
-                     "s" => "0.129770992366412"
+                     "l" => int "0.743137254901961",
+                     "h" => int "49.4117647058823",
+                     "s" => int "0.129770992366412"
                    },
           "hex" => "c6c3b5"
         },
@@ -114,9 +114,9 @@ sub get_dump_vars {
                    },
           "name" => "Gray Olive",
           "hsl" => {
-                     "l" => "0.615686274509804",
-                     "h" => "47.5",
-                     "s" => "0.122448979591837"
+                     "l" => int "0.615686274509804",
+                     "h" => int "47.5",
+                     "s" => int "0.122448979591837"
                    },
           "hex" => "a9a491"
         },
@@ -128,9 +128,9 @@ sub get_dump_vars {
                    },
           "name" => "Cloudy",
           "hsl" => {
-                     "l" => "0.649019607843137",
-                     "h" => "27.6923076923077",
-                     "s" => "0.0726256983240224"
+                     "l" => int "0.649019607843137",
+                     "h" => int "27.6923076923077",
+                     "s" => int "0.0726256983240224"
                    },
           "hex" => "aca59f"
         }

@@ -1,5 +1,8 @@
 Revision history for App-ColorNamer
 
+0.0102  December 27, 2010
+        Fixed broken tests
+
 0.0101  December 27, 2010
         First version, released on an unsuspecting world.
 
