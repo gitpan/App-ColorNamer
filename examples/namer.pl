@@ -22,12 +22,3 @@ printf "Color name: %s\nHEX: #%s\nRGB: %s\nHSL: %s\n",
     @$color{ qw/name  hex/ },
     join(', ', @{ $color->{rgb} }{ qw/r g b/ }),
     join(', ', @{ $color->{hsl} }{ qw/h s l/ });
-
-
-use Data::Dumper;
-$Data::Dumper::Useqq =1;
-
-$app->sane_colors(['FFFFFF', 'ACA59F']);
-print Dumper $app->get_name('#aaa', 1);
-
-#print Dumper $app->get_name('#bbbaaa', 1);
